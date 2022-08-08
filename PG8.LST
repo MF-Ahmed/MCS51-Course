@@ -1,0 +1,172 @@
+MCS-51 MACRO ASSEMBLER    PG8                                                                       11/27/:4   PAGE    1
+
+
+DOS 7.10 (038-N) MCS-51 MACRO ASSEMBLER, V2.2
+OBJECT MODULE PLACED IN PG8.OBJ
+ASSEMBLER INVOKED BY:  E:\BACKUP\STUDENTS\BATCH21\ASM51.EXE PG8.A51
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;*******************************PROGRAM OBJECTIVE******************************
+                       2     ;DISPLAY 16 BIT HEXADECIMAL NUMBER ON THE 4 DIGIT 7 SEGMENT WITH INCREASING OR
+                       3     ;DECREASING SPEED OF 20 COUNTS PER SECOND USING BUTTONS AT P2.1 OR P2.2
+                       4     
+0000                   5     org 000h
+0000 020030            6         jmp main
+000B                   7     org 00Bh
+000B 02006E            8         jmp ref_display
+0030                   9     org 030h
+                      10     main:
+0030 900400           11         mov dptr,#400h
+0033 758901           12         mov TMOD,#01h
+0036 758A3C           13         mov TL0,#low(-2500)
+0039 758CF6           14         mov TH0,#high(-2500)
+003C D28C             15         setb TR0
+003E D2AF             16         setb EA
+0040 D2A9             17         setb ET0
+0042 75303F           18         mov 30h,#3Fh
+0045 75313F           19         mov 31h,#3Fh
+0048 75323F           20         mov 32h,#3Fh
+004B 75333F           21         mov 33h,#3Fh
+                      22     
+                      23     increase:
+004E 20A10D           24         jb p2.1,decrease
+0051 0E               25         inc r6
+0052 BE0001           26         cjne r6,#00h,skip
+0055 0F               27         inc r7
+                      28     skip:
+0056 1200A3           29         call update_codes
+0059 1200BE           30         call delay
+005C 80F0             31         jmp increase
+                      32     
+                      33     decrease:
+005E 20A2ED           34         jb p2.2,increase
+0061 1E               35         dec r6
+0062 BEFF01           36         cjne r6,#0ffh,skip1
+0065 1F               37         dec r7
+                      38     skip1:
+0066 1200A3           39         call update_codes
+0069 1200BE           40         call delay
+006C 80F0             41         jmp decrease
+                      42     
+                      43     ref_display:
+006E 30A40A           44         jnb p2.4,chk_dig2
+0071 C2A4             45         clr p2.4
+0073 D2A5             46         setb p2.5
+0075 853180           47         mov p0,31h
+0078 02009C           48         jmp exit
+                      49     chk_dig2:
+007B 30A50A           50         jnb p2.5,chk_dig3
+MCS-51 MACRO ASSEMBLER    PG8                                                                       11/27/:4   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+007E C2A5             51         clr p2.5
+0080 D2A6             52         setb p2.6
+0082 853280           53         mov p0,32h
+0085 02009C           54         jmp exit
+                      55     chk_dig3:
+0088 30A60A           56         jnb p2.6,chk_dig4
+008B C2A6             57         clr p2.6
+008D D2A7             58         setb p2.7
+008F 853380           59         mov p0,33h
+0092 02009C           60         jmp exit
+                      61     chk_dig4:
+0095 C2A7             62         clr p2.7
+0097 D2A4             63         setb p2.4
+0099 853080           64         mov p0,30h
+                      65     exit:
+009C 758A3C           66     mov TL0,#low(-2500)
+009F 758CF6           67     mov TH0,#high(-2500)
+00A2 32               68         RETI
+                      69     
+                      70     update_codes:
+00A3 EE               71         mov A,r6
+00A4 540F             72         anl A,#0Fh
+00A6 93               73         movc A,@A+DPTR
+00A7 F530             74         mov 30h,A
+00A9 EE               75         mov A,r6
+00AA 54F0             76         anl A,#0F0h
+00AC C4               77         swap A
+00AD 93               78         movc A,@A+DPTR
+00AE F531             79         mov 31h,A
+00B0 EF               80         mov A,r7
+00B1 540F             81         anl A,#0Fh
+00B3 93               82         movc A,@A+DPTR
+00B4 F532             83         mov 32h,A
+00B6 EF               84         mov A,r7
+00B7 54F0             85         anl A,#0F0h
+00B9 C4               86         swap A
+00BA 93               87         movc A,@A+DPTR
+00BB F533             88         mov 33h,A
+00BD 22               89     ret
+                      90     
+                      91     delay:
+00BE 7864             92         mov r0,#100
+                      93     x:
+00C0 79FA             94         mov r1,#250
+00C2 D9FE             95         djnz r1,$
+00C4 D8FA             96         djnz r0,x
+00C6 22               97     ret
+                      98     
+0400                  99     org 400h
+0400 3F              100     seg_data: db 3Fh,06h,5Bh,4Fh,66h,6Dh,7Dh,07h,7Fh,6Fh,77h,7Ch,39h,5Eh,79h,71h
+0401 06
+0402 5B
+0403 4F
+0404 66
+0405 6D
+MCS-51 MACRO ASSEMBLER    PG8                                                                       11/27/:4   PAGE    3
+
+
+LOC  OBJ            LINE     SOURCE
+
+0406 7D
+0407 07
+0408 7F
+0409 6F
+040A 77
+040B 7C
+040C 39
+040D 5E
+040E 79
+040F 71
+                     101     end
+MCS-51 MACRO ASSEMBLER    PG8                                                                       11/27/:4   PAGE    4
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E       T Y P E   V A L U E       A T T R I B U T E S
+
+CHK_DIG2 . .  C ADDR    007BH   A       
+CHK_DIG3 . .  C ADDR    0088H   A       
+CHK_DIG4 . .  C ADDR    0095H   A       
+DECREASE . .  C ADDR    005EH   A       
+DELAY. . . .  C ADDR    00BEH   A       
+EA . . . . .  B ADDR    00A8H.7 A       
+ET0. . . . .  B ADDR    00A8H.1 A       
+EXIT . . . .  C ADDR    009CH   A       
+INCREASE . .  C ADDR    004EH   A       
+MAIN . . . .  C ADDR    0030H   A       
+P0 . . . . .  D ADDR    0080H   A       
+P2 . . . . .  D ADDR    00A0H   A       
+REF_DISPLAY.  C ADDR    006EH   A       
+SEG_DATA . .  C ADDR    0400H   A       
+SKIP . . . .  C ADDR    0056H   A       
+SKIP1. . . .  C ADDR    0066H   A       
+TH0. . . . .  D ADDR    008CH   A       
+TL0. . . . .  D ADDR    008AH   A       
+TMOD . . . .  D ADDR    0089H   A       
+TR0. . . . .  B ADDR    0088H.4 A       
+UPDATE_CODES  C ADDR    00A3H   A       
+X. . . . . .  C ADDR    00C0H   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

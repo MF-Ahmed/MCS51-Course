@@ -1,0 +1,63 @@
+MCS-51 MACRO ASSEMBLER    PG11                                                                      11/27/:4   PAGE    1
+
+
+DOS 7.10 (038-N) MCS-51 MACRO ASSEMBLER, V2.2
+OBJECT MODULE PLACED IN PG11.OBJ
+ASSEMBLER INVOKED BY:  E:\BACKUP\STUDENTS\BATCH21\ASM51.EXE PG11.A51
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;TRANSMITT THE ASCII CODES FROM A TO Z CONTINUOUSLY THROUGH SERIAL PORT OF
+                       2     ;89C51.USE THE BAUD RATE OF 9600 BPS.
+0000                   3     ORG 000h
+0000 020030            4     jmp main
+0023                   5     org 023h
+0023 020045            6     jmp si_
+0030                   7     org 030h
+                       8     main:
+0030 759840            9     mov scon,#40h
+0033 758920           10     mov tmod,#20h
+0036 758DFD           11     mov th1,#-3
+0039 D28E             12     setb tr1
+003B D2AF             13     setb ea
+003D D2AC             14     setb es
+003F 7441             15     mov a,#'A'
+0041 F599             16     mov sbuf,a
+0043 80FE             17     jmp $
+                      18     
+                      19     si_:
+0045 C299             20     clr ti
+0047 04               21     inc a
+0048 B45B02           22     cjne a,#'Z'+1,skip
+004B 7441             23     mov a,#'A'
+                      24     skip:
+004D F599             25     mov sbuf,a
+004F 32               26     reti
+                      27     
+                      28     end
+MCS-51 MACRO ASSEMBLER    PG11                                                                      11/27/:4   PAGE    2
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+EA . . . .  B ADDR    00A8H.7 A       
+ES . . . .  B ADDR    00A8H.4 A       
+MAIN . . .  C ADDR    0030H   A       
+SBUF . . .  D ADDR    0099H   A       
+SCON . . .  D ADDR    0098H   A       
+SI_. . . .  C ADDR    0045H   A       
+SKIP . . .  C ADDR    004DH   A       
+TH1. . . .  D ADDR    008DH   A       
+TI . . . .  B ADDR    0098H.1 A       
+TMOD . . .  D ADDR    0089H   A       
+TR1. . . .  B ADDR    0088H.6 A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

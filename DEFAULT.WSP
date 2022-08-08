@@ -1,0 +1,15 @@
+Project=
+ProcessorType=1
+DefaultFindDir=F:\All 8051\Batch21
+SectorSize=64
+EnablePagedMemory=0
+EnablePaged8bitAddressing=0
+PagedMemoryControlAddress=0
+NumberOfMemoryPages=1
+ProcessorVariant=0
+LoaderType=0
+EnableAutoUpdate=0
+UpdateCount=10000
+Window=8051,PG11.A51,E:\Farhan\E\All 8051\Batch21\PG11.A51,87,66,528,936
+Window=8051,LCD1.A51,E:\Farhan\E\All 8051\Batch21\LCD1.A51,87,66,528,936
+Window=8051,PG14.A51,E:\Farhan\E\All 8051\Batch21\PG14.A51,87,66,528,936

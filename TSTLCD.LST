@@ -1,0 +1,247 @@
+MCS-51 MACRO ASSEMBLER    TSTLCD                                                                    11/27/:4   PAGE    1
+
+
+DOS 7.10 (038-N) MCS-51 MACRO ASSEMBLER, V2.2
+OBJECT MODULE PLACED IN TSTLCD.OBJ
+ASSEMBLER INVOKED BY:  E:\BACKUP\STUDENTS\BATCH21\ASM51.EXE TSTLCD.A51
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;************THIS PROGRAM IS MADE FOR THE TESTING OF LCD MODULE**************
+  00B3                 2     RS_LCD          BIT P3.3
+  00B4                 3     E_LCD           BIT P3.4
+  00B5                 4     RW_LCD          BIT P3.5
+  0091                 5     ERR_LED         BIT P1.1
+  0080                 6     LCD             EQU P0
+  0044                 7     LCD_CHR         EQU 44H
+  0045                 8     COM_STR_PTR     EQU 45H
+                       9     
+0000                  10     ORG 000h
+0000 C2B4             11                 CLR     E_LCD
+0002 C2B3             12                 CLR     RS_LCD
+0004 C2B5             13                 CLR     RW_LCD
+0006 12002F           14                 CALL    INIT_LCD
+0009 1200AC           15                 CALL    DELAY_15ms
+                      16     AGAIN:
+000C 9000B5           17                 MOV     DPTR,#STRT_MES
+000F 120019           18                 CALL    SHOW_COMM
+0012 12009F           19                 CALL    DELAY_1s
+0015 B290             20                 CPL     P1.0    
+0017 80F3             21                 JMP     AGAIN
+                      22     ;**********************INITIALLIZATION OF LCD DISPLAY************************
+                      23     ;PURPOSE:                       A SUBROUTINE TO INITIALLIZE 20X4 LCD DISPLAY
+                      24     ;REQUIRE EXECUTION TIME:        15ms
+                      25     ;USES (VARIABLES):              NON
+                      26     ;USES (SUBROUTINES):            DELAY_15ms, DELAY_50us
+                      27     ;DISTROYS:                      NON
+                      28     ;****************************************************************************
+                      29     SHOW_COMM:
+0019 7545FF           30                             MOV     COM_STR_PTR,#0FFH
+                      31     COMM_AGN:
+001C 0545             32                             INC     COM_STR_PTR
+001E E545             33                             MOV     A,COM_STR_PTR
+0020 93               34                             MOVC    A,@A+DPTR
+0021 B42403           35                             CJNE    A,#'$',COMM_AGN1
+0024 02002E           36                             JMP     EXIT_SHOW_COM
+                      37     COMM_AGN1:
+0027 F580             38                             MOV     LCD,A
+0029 12006A           39                             CALL    WR_LCD_DATA     ;WRite_LCD
+002C 80EE             40                             JMP     COMM_AGN
+                      41     EXIT_SHOW_COM:
+002E 22               42     RET
+                      43     ;****************************************************************************
+                      44     
+                      45     ;**********************INITIALLIZATION OF LCD DISPLAY************************
+                      46     ;PURPOSE:                       A SUBROUTINE TO INITIALLIZE 20X4 LCD DISPLAY
+                      47     ;REQUIRE EXECUTION TIME:        15ms
+                      48     ;USES (VARIABLES):              NON
+                      49     ;USES (SUBROUTINES):            DELAY_15ms, DELAY_50us
+                      50     ;DISTROYS:                      NON
+MCS-51 MACRO ASSEMBLER    TSTLCD                                                                    11/27/:4   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+                      51     ;****************************************************************************
+                      52     INIT_LCD:
+002F 7803             53             MOV  R0,#03H
+0031 758038           54             MOV  LCD,#38H
+                      55     INIT_LCD1:
+0034 1200AC           56             CALL DELAY_15ms
+0037 120061           57             CALL WR_LCD_COMMAND
+003A D8F8             58             DJNZ R0,INIT_LCD1
+                      59             
+003C 758038           60             MOV  LCD,#38H
+003F 120061           61             CALL WR_LCD_COMMAND
+0042 120088           62             CALL CHK_LCD_BUSY
+                      63     
+0045 75800E           64             MOV  LCD,#0EH
+0048 120061           65             CALL WR_LCD_COMMAND
+004B 120088           66             CALL CHK_LCD_BUSY
+                      67     
+004E 758001           68             MOV  LCD,#01H
+0051 120061           69             CALL WR_LCD_COMMAND
+0054 120088           70             CALL CHK_LCD_BUSY
+                      71     
+0057 758006           72             MOV  LCD,#06H
+005A 120061           73             CALL WR_LCD_COMMAND
+005D 120088           74             CALL CHK_LCD_BUSY
+0060 22               75     RET
+                      76     ;****************************************************************************
+                      77     
+                      78     ;**********************INITIALLIZATION OF LCD DISPLAY************************
+                      79     ;PURPOSE:                       A SUBROUTINE TO INITIALLIZE 20X4 LCD DISPLAY
+                      80     ;REQUIRE EXECUTION TIME:        15ms
+                      81     ;USES (VARIABLES):              NON
+                      82     ;USES (SUBROUTINES):            DELAY_15ms, DELAY_50us
+                      83     ;DISTROYS:                      NON
+                      84     ;****************************************************************************
+                      85     WR_LCD_COMMAND:
+0061 C2B3             86             CLR  RS_LCD
+0063 C2B5             87             CLR  RW_LCD
+0065 D2B4             88             SETB E_LCD
+0067 C2B4             89             CLR  E_LCD
+0069 22               90     RET
+                      91     ;****************************************************************************
+                      92     
+                      93     ;**********************INITIALLIZATION OF LCD DISPLAY************************
+                      94     ;PURPOSE:                       A SUBROUTINE TO INITIALLIZE 20X4 LCD DISPLAY
+                      95     ;REQUIRE EXECUTION TIME:        15ms
+                      96     ;USES (VARIABLES):              NON
+                      97     ;USES (SUBROUTINES):            DELAY_15ms, DELAY_50us
+                      98     ;DISTROYS:                      NON
+                      99     ;****************************************************************************
+                     100     WR_LCD_DATA:
+006A D2B3            101             SETB RS_LCD
+006C C2B5            102             CLR  RW_LCD
+006E D2B4            103             SETB E_LCD
+0070 C2B4            104             CLR  E_LCD
+0072 120088          105             CALL CHK_LCD_BUSY
+MCS-51 MACRO ASSEMBLER    TSTLCD                                                                    11/27/:4   PAGE    3
+
+
+LOC  OBJ            LINE     SOURCE
+
+0075 22              106     RET
+                     107     ;****************************************************************************
+                     108             
+                     109     ;**********************INITIALLIZATION OF LCD DISPLAY************************
+                     110     ;PURPOSE:                       A SUBROUTINE TO INITIALLIZE 20X4 LCD DISPLAY
+                     111     ;REQUIRE EXECUTION TIME:        15ms
+                     112     ;USES (VARIABLES):              NON
+                     113     ;USES (SUBROUTINES):            DELAY_15ms, DELAY_50us
+                     114     ;DISTROYS:                      NON
+                     115     ;****************************************************************************
+                     116     RD_LCD_DATA:
+0076 7580FF          117             MOV  LCD,#0FFH
+0079 D2B3            118             SETB RS_LCD
+007B D2B5            119             SETB RW_LCD
+007D D2B4            120             SETB E_LCD
+007F 858044          121             MOV  LCD_CHR,LCD
+0082 C2B4            122             CLR  E_LCD
+0084 120088          123             CALL CHK_LCD_BUSY
+0087 22              124     RET
+                     125     ;****************************************************************************
+                     126     
+                     127     ;**********************INITIALLIZATION OF LCD DISPLAY************************
+                     128     ;PURPOSE:                       A SUBROUTINE TO INITIALLIZE 20X4 LCD DISPLAY
+                     129     ;REQUIRE EXECUTION TIME:        15ms
+                     130     ;USES (VARIABLES):              NON
+                     131     ;USES (SUBROUTINES):            DELAY_15ms, DELAY_50us
+                     132     ;DISTROYS:                      NON
+                     133     ;****************************************************************************
+                     134     CHK_LCD_BUSY:
+0088 7580FF          135             MOV  LCD,#0FFH
+008B C2B3            136             CLR  RS_LCD
+008D D2B5            137             SETB RW_LCD
+008F 780F            138             MOV  R0,#0FH
+                     139     CHK_AGN:
+0091 D2B4            140             SETB E_LCD
+0093 E580            141             MOV  A,LCD
+0095 C2B4            142             CLR  E_LCD
+0097 30E704          143             JNB  ACC.7,EXIT_CHK_LCD
+009A D8F5            144             DJNZ R0,CHK_AGN
+009C B291            145             CPL  ERR_LED
+                     146     EXIT_CHK_LCD:
+009E 22              147     RET
+                     148     ;****************************************************************************
+                     149     
+                     150     ;****************************************************************************
+                     151     DELAY_1s:
+009F 780A            152                     MOV     R0,#10
+                     153     X2:
+00A1 79C8            154                     MOV     R1,#200
+                     155     Y3:
+00A3 7AFA            156                             MOV     R2,#250
+00A5 DAFE            157                             DJNZ    R2,$
+00A7 D9FA            158                             DJNZ    R1,Y3
+00A9 D8F6            159                             DJNZ    R0,X2
+00AB 22              160     RET
+MCS-51 MACRO ASSEMBLER    TSTLCD                                                                    11/27/:4   PAGE    4
+
+
+LOC  OBJ            LINE     SOURCE
+
+                     161     ;****************************************************************************
+                     162     
+                     163     ;****************************************************************************
+                     164     DELAY_15ms:
+00AC 791E            165                             MOV     R1,#30
+                     166     Y2:
+00AE 7AFA            167                             MOV     R2,#250
+00B0 DAFE            168                             DJNZ    R2,$
+00B2 D9FA            169                             DJNZ    R1,Y2
+00B4 22              170     RET
+                     171     ;****************************************************************************
+                     172     
+00B5 54455354        173     STRT_MES: DB 'TESTING MESSAGE ABC$'
+00B9 494E4720
+00BD 4D455353
+00C1 41474520
+00C5 41424324
+                     174     end
+MCS-51 MACRO ASSEMBLER    TSTLCD                                                                    11/27/:4   PAGE    5
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E         T Y P E   V A L U E       A T T R I B U T E S
+
+ACC. . . . . .  D ADDR    00E0H   A       
+AGAIN. . . . .  C ADDR    000CH   A       
+CHK_AGN. . . .  C ADDR    0091H   A       
+CHK_LCD_BUSY .  C ADDR    0088H   A       
+COM_STR_PTR. .    NUMB    0045H   A       
+COMM_AGN . . .  C ADDR    001CH   A       
+COMM_AGN1. . .  C ADDR    0027H   A       
+DELAY_15MS . .  C ADDR    00ACH   A       
+DELAY_1S . . .  C ADDR    009FH   A       
+E_LCD. . . . .  B ADDR    00B0H.4 A       
+ERR_LED. . . .  B ADDR    0090H.1 A       
+EXIT_CHK_LCD .  C ADDR    009EH   A       
+EXIT_SHOW_COM.  C ADDR    002EH   A       
+INIT_LCD . . .  C ADDR    002FH   A       
+INIT_LCD1. . .  C ADDR    0034H   A       
+LCD_CHR. . . .    NUMB    0044H   A       
+LCD. . . . . .  D ADDR    0080H   A       
+P0 . . . . . .  D ADDR    0080H   A       
+P1 . . . . . .  D ADDR    0090H   A       
+P3 . . . . . .  D ADDR    00B0H   A       
+RD_LCD_DATA. .  C ADDR    0076H   A       
+RS_LCD . . . .  B ADDR    00B0H.3 A       
+RW_LCD . . . .  B ADDR    00B0H.5 A       
+SHOW_COMM. . .  C ADDR    0019H   A       
+STRT_MES . . .  C ADDR    00B5H   A       
+WR_LCD_COMMAND  C ADDR    0061H   A       
+WR_LCD_DATA. .  C ADDR    006AH   A       
+X2 . . . . . .  C ADDR    00A1H   A       
+Y2 . . . . . .  C ADDR    00AEH   A       
+Y3 . . . . . .  C ADDR    00A3H   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

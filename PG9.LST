@@ -1,0 +1,209 @@
+MCS-51 MACRO ASSEMBLER    PG9                                                                       11/27/:4   PAGE    1
+
+
+DOS 7.10 (038-N) MCS-51 MACRO ASSEMBLER, V2.2
+OBJECT MODULE PLACED IN PG9.OBJ
+ASSEMBLER INVOKED BY:  E:\BACKUP\STUDENTS\BATCH21\ASM51.EXE PG9.A51
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;*******************************PROGRAM OBJECTIVE******************************
+                       2     ;ENTER THE 7 SEGMENT CODE ON 4 DIGIT 7 SEGMENT DISPLAY WHEN A KEY IS PRESSED
+                       3     ;ON THE HEX KEYPAD. THE CODE OF A NEW KEY SHOULD BE ENTERED FROM RIGHT SIDE OF
+                       4     ;THE DISPLAY AND THE PREVIOUS DATA WILL ALSO BE SHIFTED.
+                       5     
+0000                   6     org 000h
+0000 020030            7         jmp main
+000B                   8     org 00Bh
+000B 0200D9            9         jmp ref_display
+0030                  10     org 030h
+                      11     main:
+0030 900200           12         mov dptr,#200h
+0033 758901           13         mov TMOD,#01h
+0036 758A3C           14         mov TL0,#low(-2500)
+0039 758CF6           15         mov TH0,#high(-2500)
+003C D28C             16         setb TR0
+003E D2AF             17         setb EA
+0040 D2A9             18         setb ET0
+0042 75303F           19         mov 30h,#3Fh
+0045 75313F           20         mov 31h,#3Fh
+0048 75323F           21         mov 32h,#3Fh
+004B 75333F           22         mov 33h,#3Fh
+                      23     again:
+004E 12011E           24         call delay_400ms
+0051 50FB             25         jnc again
+0053 853233           26         mov 33h,32h
+0056 853132           27         mov 32h,31h
+0059 853031           28         mov 31h,30h
+                      29     key0:
+005C B48705           30         cjne a,#87h,key1
+005F 75303F           31         mov 30h,#3fh
+0062 80EA             32         jmp again
+                      33     key1:
+0064 B44705           34         cjne a,#47h,key2
+0067 753006           35         mov 30h,#06h
+006A 80E2             36         jmp again
+                      37     key2:
+006C B42705           38         cjne a,#27h,key3
+006F 75305B           39         mov 30h,#5Bh
+0072 80DA             40         jmp again
+                      41     key3:
+0074 B41705           42         cjne a,#17h,key4
+0077 75304F           43         mov 30h,#4fh
+007A 80D2             44         jmp again
+                      45     key4:
+007C B48B05           46         cjne a,#8bh,key5
+007F 753066           47         mov 30h,#66h
+0082 80CA             48         jmp again
+                      49     key5:
+0084 B44B05           50         cjne a,#4bh,key6
+MCS-51 MACRO ASSEMBLER    PG9                                                                       11/27/:4   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+0087 75306D           51         mov 30h,#6Dh
+008A 80C2             52         jmp again
+                      53     key6:
+008C B42B05           54         cjne a,#2bh,key7
+008F 75307D           55         mov 30h,#7Dh
+0092 80BA             56         jmp again
+                      57     key7:
+0094 B41B05           58         cjne a,#1bh,key8
+0097 753007           59         mov 30h,#07h
+009A 80B2             60         jmp again
+                      61     key8:
+009C B48D05           62         cjne a,#8dh,key9
+009F 75307F           63         mov 30h,#7Fh
+00A2 80AA             64         jmp again
+                      65     key9:
+00A4 B44D05           66         cjne a,#4dh,keyA
+00A7 75306F           67         mov 30h,#6Fh
+00AA 80A2             68         jmp again
+                      69     keyA:
+00AC B42D05           70         cjne a,#2dh,keyB
+00AF 753077           71         mov 30h,#77h
+00B2 809A             72         jmp again
+                      73     keyB:
+00B4 B41D05           74         cjne a,#1dh,keyC
+00B7 75307C           75         mov 30h,#7Ch
+00BA 8092             76         jmp again
+                      77     keyC:
+00BC B48E05           78         cjne a,#8eh,keyD
+00BF 753039           79         mov 30h,#39h
+00C2 808A             80         jmp again
+                      81     keyD:
+00C4 B44E05           82         cjne a,#4eh,keyE
+00C7 75305E           83         mov 30h,#5Eh
+00CA 8082             84         jmp again
+                      85     keyE:
+00CC B42E05           86         cjne a,#2eh,keyF
+00CF 753079           87         mov 30h,#79h
+00D2 014E             88         jmp again
+                      89     keyF:
+00D4 753071           90         mov 30h,#71h
+00D7 014E             91         jmp again
+                      92     
+                      93     ref_display:
+00D9 30A40A           94         jnb p2.4,chk_dig2
+00DC C2A4             95         clr p2.4
+00DE D2A5             96         setb p2.5
+00E0 853180           97         mov p0,31h
+00E3 020107           98         jmp exit
+                      99     chk_dig2:
+00E6 30A50A          100         jnb p2.5,chk_dig3
+00E9 C2A5            101         clr p2.5
+00EB D2A6            102         setb p2.6
+00ED 853280          103         mov p0,32h
+00F0 020107          104         jmp exit
+                     105     chk_dig3:
+MCS-51 MACRO ASSEMBLER    PG9                                                                       11/27/:4   PAGE    3
+
+
+LOC  OBJ            LINE     SOURCE
+
+00F3 30A60A          106         jnb p2.6,chk_dig4
+00F6 C2A6            107         clr p2.6
+00F8 D2A7            108         setb p2.7
+00FA 853380          109         mov p0,33h
+00FD 020107          110         jmp exit
+                     111     chk_dig4:
+0100 C2A7            112         clr p2.7
+0102 D2A4            113         setb p2.4
+0104 853080          114         mov p0,30h
+                     115     exit:
+0107 758A3C          116     mov TL0,#low(-2500)
+010A 758CF6          117     mov TH0,#high(-2500)
+010D 7F32            118         mov r7,#50
+010F DFFE            119         djnz r7,$
+0111 E5A0            120         mov a,p2
+0113 540F            121         anl a,#0fh
+0115 B40F02          122         cjne a,#0fh,key_press
+0118 C3              123         clr c
+0119 32              124         reti
+                     125     key_press:
+011A D3              126         setb c
+011B E5A0            127         mov a,p2
+011D 32              128     reti
+                     129     
+                     130     delay_400ms:
+011E 7A04            131         mov r2,#4
+                     132     y:
+0120 79C8            133         mov r1,#200
+                     134     x:
+0122 78FA            135         mov r0,#250
+0124 D8FE            136         djnz r0,$
+0126 D9FA            137         djnz r1,x
+0128 DAF6            138         djnz r2,y
+012A 22              139     ret
+                     140     end
+MCS-51 MACRO ASSEMBLER    PG9                                                                       11/27/:4   PAGE    4
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E      T Y P E   V A L U E       A T T R I B U T E S
+
+AGAIN . . .  C ADDR    004EH   A       
+CHK_DIG2. .  C ADDR    00E6H   A       
+CHK_DIG3. .  C ADDR    00F3H   A       
+CHK_DIG4. .  C ADDR    0100H   A       
+DELAY_400MS  C ADDR    011EH   A       
+EA. . . . .  B ADDR    00A8H.7 A       
+ET0 . . . .  B ADDR    00A8H.1 A       
+EXIT. . . .  C ADDR    0107H   A       
+KEY_PRESS .  C ADDR    011AH   A       
+KEY0. . . .  C ADDR    005CH   A       
+KEY1. . . .  C ADDR    0064H   A       
+KEY2. . . .  C ADDR    006CH   A       
+KEY3. . . .  C ADDR    0074H   A       
+KEY4. . . .  C ADDR    007CH   A       
+KEY5. . . .  C ADDR    0084H   A       
+KEY6. . . .  C ADDR    008CH   A       
+KEY7. . . .  C ADDR    0094H   A       
+KEY8. . . .  C ADDR    009CH   A       
+KEY9. . . .  C ADDR    00A4H   A       
+KEYA. . . .  C ADDR    00ACH   A       
+KEYB. . . .  C ADDR    00B4H   A       
+KEYC. . . .  C ADDR    00BCH   A       
+KEYD. . . .  C ADDR    00C4H   A       
+KEYE. . . .  C ADDR    00CCH   A       
+KEYF. . . .  C ADDR    00D4H   A       
+MAIN. . . .  C ADDR    0030H   A       
+P0. . . . .  D ADDR    0080H   A       
+P2. . . . .  D ADDR    00A0H   A       
+REF_DISPLAY  C ADDR    00D9H   A       
+TH0 . . . .  D ADDR    008CH   A       
+TL0 . . . .  D ADDR    008AH   A       
+TMOD. . . .  D ADDR    0089H   A       
+TR0 . . . .  B ADDR    0088H.4 A       
+X . . . . .  C ADDR    0122H   A       
+Y . . . . .  C ADDR    0120H   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

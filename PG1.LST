@@ -1,0 +1,52 @@
+MCS-51 MACRO ASSEMBLER    PG1                                                                       10/30/:4   PAGE    1
+
+
+DOS 7.10 (038-N) MCS-51 MACRO ASSEMBLER, V2.2
+OBJECT MODULE PLACED IN E:\STUDENTS\BATCH21\PG1.OBJ
+ASSEMBLER INVOKED BY:  E:\STUDENTS\BATCH21\ASM51.EXE E:\STUDENTS\BATCH21\PG1.A51
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;*******************************PROGRAM OBJECTIVE******************************
+                       2     ;GENERATE THE BINARY PATERN IN INCREASING ORDER ON THE LEDs CONNECTED AT PORT1
+                       3     ;SET THE INCREASING SPEED OF 2 COUNTS PER SECOND.
+                       4     
+0000                   5     org 00h
+                       6     MAIN:
+0000 F4                7             cpl A
+0001 F590              8             mov p1,A
+0003 F4                9             cpl A
+0004 12000A           10             call DELAY
+0007 04               11             inc A
+0008 80F6             12             jmp MAIN
+                      13     DELAY:
+000A 7905             14             mov R1,#5
+                      15     Y:
+000C 7AC8             16             mov R2,#200
+                      17     X:
+000E 7BFA             18             mov R3,#250
+0010 DBFE             19             djnz R3,$
+0012 DAFA             20             djnz R2,X
+0014 D9F6             21             djnz R1,Y
+0016 22               22     ret
+                      23     end
+MCS-51 MACRO ASSEMBLER    PG1                                                                       10/30/:4   PAGE    2
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+DELAY. . .  C ADDR    000AH   A       
+MAIN . . .  C ADDR    0000H   A       
+P1 . . . .  D ADDR    0090H   A       
+X. . . . .  C ADDR    000EH   A       
+Y. . . . .  C ADDR    000CH   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

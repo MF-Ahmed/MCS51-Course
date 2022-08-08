@@ -1,0 +1,55 @@
+MCS-51 MACRO ASSEMBLER    PG5                                                                       11/27/:4   PAGE    1
+
+
+DOS 7.10 (038-N) MCS-51 MACRO ASSEMBLER, V2.2
+OBJECT MODULE PLACED IN PG5.OBJ
+ASSEMBLER INVOKED BY:  E:\BACKUP\STUDENTS\BATCH21\ASM51.EXE PG5.A51
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;*******************************PROGRAM OBJECTIVE******************************
+                       2     ;GENERATE THE CLOCK PULSES OF 30 Hz AT P1.0 BY USING TIMER 0.
+                       3     
+0000                   4     ORG 000H
+0000 020030            5     JMP MAIN
+000B                   6     org 00BH
+000B 020041            7     JMP CLOCK
+0030                   8     org 030H
+                       9     MAIN:
+0030 758901           10           MOV TMOD,#01H
+0033 85C58C           11           MOV TH0,HIGH(-15000)
+0036 85688A           12           MOV TL0,LOW(-15000)
+0039 D2AF             13           SETB EA
+003B D2A9             14           SETB ET0
+003D D28C             15           SETB TR0
+003F 80FE             16           JMP $
+                      17     CLOCK:
+0041 B290             18           CPL P1.0 
+0043 85C58C           19           MOV TH0,HIGH(-15000)
+0046 85688A           20           MOV TL0,LOW(-15000)
+0049 32               21           RETI
+                      22     END
+MCS-51 MACRO ASSEMBLER    PG5                                                                       11/27/:4   PAGE    2
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+CLOCK. . .  C ADDR    0041H   A       
+EA . . . .  B ADDR    00A8H.7 A       
+ET0. . . .  B ADDR    00A8H.1 A       
+MAIN . . .  C ADDR    0030H   A       
+P1 . . . .  D ADDR    0090H   A       
+TH0. . . .  D ADDR    008CH   A       
+TL0. . . .  D ADDR    008AH   A       
+TMOD . . .  D ADDR    0089H   A       
+TR0. . . .  B ADDR    0088H.4 A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

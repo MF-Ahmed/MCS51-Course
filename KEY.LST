@@ -1,0 +1,34 @@
+8051 Assembler           Version 1.00   03/24/111 15:41:25    Page 1
+E:\Farhan\E\All 8051\Batch21\KEY.A51
+
+
+
+    1 0000              org 000H
+    2 0000              
+    3 0000              begin:
+    4 0000 20B6FD       jb P3.6,$
+    5 0003 30B6FD       jnb P3.6,$
+    6 0006              
+    7 0006 7F08         mov R7,#8
+    8 0008              start:
+    9 0008 20B6FD       jb P3.6,$
+   10 000B A2B7         mov c,P3.7
+   11 000D 13           rrc A
+   12 000E 30B6FD       jnb P3.6,$
+   13 0011 DFF5         djnz R7,start
+   14 0013              
+   15 0013 20B6FD       jb P3.6,$
+   16 0016 30B6FD       jnb P3.6,$
+   17 0019 20B6FD       jb P3.6,$
+   18 001C 30B6FD       jnb P3.6,$
+   19 001F              
+   20 001F F4           cpl A
+   21 0020 F590         mov P1,A
+   22 0022 020000       jmp begin
+   23 0025              end
+
+Defined Symbols:
+
+Defined Labels:
+  begin                                     000000  0
+  start                                     000008  8

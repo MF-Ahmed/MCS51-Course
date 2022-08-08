@@ -1,0 +1,58 @@
+MCS-51 MACRO ASSEMBLER    PG10                                                                      11/27/:4   PAGE    1
+
+
+DOS 7.10 (038-N) MCS-51 MACRO ASSEMBLER, V2.2
+OBJECT MODULE PLACED IN PG10.OBJ
+ASSEMBLER INVOKED BY:  E:\BACKUP\STUDENTS\BATCH21\ASM51.EXE PG10.A51
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;*******************************PROGRAM OBJECTIVE******************************
+                       2     ;RECEIVE THE SCAN CODE COMING FROM THE ATKEYBOARD AT P3.6(CLK) AND P3.7 (DATA)
+                       3     ;DISPLAY THE BINARY PATERN OF THE SCANE CODE ON THE LEDs
+                       4     
+  00B6                 5     clk bit p3.6
+  00B7                 6     dta bit p3.7
+                       7     
+0000                   8     org 000H
+                       9     start:
+0000 20B6FD           10         jb clk,$
+0003 30B6FD           11         jnb clk,$
+0006 7808             12         mov R0,#8
+                      13     again:
+0008 20B6FD           14         jb clk,$
+000B A2B7             15         mov c,dta
+000D 13               16         rrc A
+000E 30B6FD           17         jnb clk,$
+0011 D8F5             18         djnz R0,again
+                      19     
+0013 20B6FD           20         jb clk,$
+0016 30B6FD           21         jnb clk,$
+0019 20B6FD           22         jb clk,$
+001C 30B6FD           23         jnb clk,$
+                      24     
+001F F4               25         cpl A
+0020 F590             26         mov P1,A
+0022 80DC             27         jmp start
+                      28     end
+MCS-51 MACRO ASSEMBLER    PG10                                                                      11/27/:4   PAGE    2
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+AGAIN. . .  C ADDR    0008H   A       
+CLK. . . .  B ADDR    00B0H.6 A       
+DTA. . . .  B ADDR    00B0H.7 A       
+P1 . . . .  D ADDR    0090H   A       
+P3 . . . .  D ADDR    00B0H   A       
+START. . .  C ADDR    0000H   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

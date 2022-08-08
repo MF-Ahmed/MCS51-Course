@@ -1,0 +1,47 @@
+
+code	abbreviation	meaning
+-------------------------------------------------------------------------
+0x0A		E	command end
+'a'		A	command succesful executed
+'n'		N	command unknown or execution error
+'c'		C	continue, send next byte
+0..9,A..F	H	hex number (only upper case)
+0x00..0xFF	B	byte
+
+
+PC			programmer
+-------------------------------------------------------------------------
+"Magic",E		A		enable in system programmer
+"Reset",E		A		disable in system programmer,
+					reset target
+
+"Vers",E;C;C;C;C;C;E	H;H;H;H;H;H:A	version code (6 hex nunbers)
+"D1200",E		A		set target type (1200)
+"DE1200",E		A		select EEPROM of target
+"U12V",E		A		set program voltage
+"Size",H,H,H,H,E	A		set target size (4 hex numbers)
+"Check",E;C;C;C;C;C;E	H;H;H;H;H;H;A	checksum (6 hex numbers)
+"Rsig",E;C;C;C;C;C;E	H;H;H;H;H;H;A	Read Signature
+"Erase",E		A		erase target
+
+"Read",H,H,H,H,E	B		set address HHHH, read 1 byte
+C			B		read next byte
+E			A		end read
+
+"Prog",H,H,H,H,E,B	A		program 1 byte
+			or
+			N		program failed (e.g. if not erased)
+B			A		program next byte
+0xA5,0xA5		A		program byte 0xA5
+0xa5,0x00		A		end program
+	
+"Lock?",E;E		H;A		read lock mode (0..3)
+			or
+			N		read lock mode not supported
+"Lock",H,E		A		set lock mode (0..3)
+
+"Fuse?",E;C;E		H;H;A		read fuse (max 8 bits)
+			or
+			N		read fuse not supported
+"Fuse",H,H,E		A		set fuse bits
+-------------------------------------------------------------------------

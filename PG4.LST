@@ -1,0 +1,78 @@
+MCS-51 MACRO ASSEMBLER    PG4                                                                       11/27/:4   PAGE    1
+
+
+DOS 7.10 (038-N) MCS-51 MACRO ASSEMBLER, V2.2
+OBJECT MODULE PLACED IN PG4.OBJ
+ASSEMBLER INVOKED BY:  E:\BACKUP\STUDENTS\BATCH21\ASM51.EXE PG4.A51
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;*******************************PROGRAM OBJECTIVE******************************
+                       2     ;GENERATE THE 7 SEGMENT CODES OF HEXADECIMAL NOMBERS IN INCREASING ORDER ON THE
+                       3     ;LEAST SIGNIFICANT DIGIT OF 7 SEGMENT DISPLAY. SET THE INCREASING SPEED OF 1
+                       4     ;COUNT PER SECOND. USE CODE MEMORY FOR SEGMENT CODES.
+0000                   5     org 000h
+0000 C2A5              6         clr p2.5
+0002 C2A6              7         clr p2.6
+0004 C2A7              8         clr p2.7
+0006 900400            9         mov dptr,#400h
+0009 7F00             10         mov r7,#00h
+                      11     again:
+000B EF               12         mov a,r7
+000C 540F             13         anl A,#0Fh
+000E 93               14         movc A,@A+DPTR
+000F F580             15         mov P0,A
+0011 0F               16         inc r7
+0012 120017           17         call delay
+0015 80F4             18         jmp again
+                      19     
+                      20     DELAY:
+0017 790A             21             mov R1,#10
+                      22     Y:
+0019 7AC8             23             mov R2,#200
+                      24     X:
+001B 7BFA             25             mov R3,#250
+001D DBFE             26             djnz R3,$
+001F DAFA             27             djnz R2,X
+0021 D9F6             28             djnz R1,Y
+0023 22               29     ret
+0400                  30     org 400h
+0400 3F               31     seg_data: db 3Fh,06h,5Bh,4Fh,66h,6Dh,7Dh,07h,7Fh,6Fh,77h,7Ch,39h,5Eh,79h,71h
+0401 06
+0402 5B
+0403 4F
+0404 66
+0405 6D
+0406 7D
+0407 07
+0408 7F
+0409 6F
+040A 77
+040B 7C
+040C 39
+040D 5E
+040E 79
+040F 71
+                      32     end
+MCS-51 MACRO ASSEMBLER    PG4                                                                       11/27/:4   PAGE    2
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+AGAIN. . .  C ADDR    000BH   A       
+DELAY. . .  C ADDR    0017H   A       
+P0 . . . .  D ADDR    0080H   A       
+P2 . . . .  D ADDR    00A0H   A       
+SEG_DATA .  C ADDR    0400H   A       
+X. . . . .  C ADDR    001BH   A       
+Y. . . . .  C ADDR    0019H   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

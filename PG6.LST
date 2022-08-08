@@ -1,0 +1,87 @@
+MCS-51 MACRO ASSEMBLER    PG6                                                                       11/27/:4   PAGE    1
+
+
+DOS 7.10 (038-N) MCS-51 MACRO ASSEMBLER, V2.2
+OBJECT MODULE PLACED IN PG6.OBJ
+ASSEMBLER INVOKED BY:  E:\BACKUP\STUDENTS\BATCH21\ASM51.EXE PG6.A51
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;*******************************PROGRAM OBJECTIVE******************************
+                       2     ;DISPLAY THE CONSTANT NUMBER 1234 ON THE 4 DIGIT 7 SEGMENT DISPLAY BY USING
+                       3     ;TIMER.
+                       4     
+0000                   5     org 000h
+0000 020030            6     jmp main
+00B0                   7     org 0b0h
+00B0 02004D            8     jmp ref_display
+0030                   9     org 030h
+                      10     main:
+0030 758901           11     mov TMOD,#01h
+0033 758A3C           12     mov TL0,#low(-2500)
+0036 758CF6           13     mov TH0,#high(-2500)
+0039 D2AF             14         setb EA
+003B D2A9             15         setb ET0
+003D D28C             16         setb TR0
+003F 753066           17         mov 30h,#66h
+0042 75314F           18         mov 31h,#4fh
+0045 75325B           19         mov 32h,#5bh
+0048 753306           20         mov 33h,#06h
+004B 80FE             21         jmp $
+                      22     
+                      23     ref_display:
+004D 30A40A           24         jnb p2.4,chk_dig2
+0050 C2A4             25         clr p2.4
+0052 D2A5             26         setb p2.5
+0054 853180           27         mov p0,31h
+0057 02007B           28         jmp exit
+                      29     chk_dig2:
+005A 30A50A           30         jnb p2.5,chk_dig3
+005D C2A5             31         clr p2.5
+005F D2A6             32         setb p2.6
+0061 853280           33         mov p0,32h
+0064 02007B           34         jmp exit
+                      35     chk_dig3:
+0067 30A60A           36         jnb p2.6,chk_dig4
+006A C2A6             37         clr p2.6
+006C D2A7             38         setb p2.7
+006E 853380           39         mov p0,33h
+0071 02007B           40         jmp exit
+                      41     chk_dig4:
+0074 C2A7             42         clr p2.7
+0076 D2A4             43         setb p2.4
+0078 853080           44         mov p0,30h
+                      45     exit:
+007B 758A3C           46     mov TL0,#low(-2500)
+007E 758CF6           47     mov TH0,#high(-2500)
+0081 32               48         RETI
+                      49     end
+MCS-51 MACRO ASSEMBLER    PG6                                                                       11/27/:4   PAGE    2
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E      T Y P E   V A L U E       A T T R I B U T E S
+
+CHK_DIG2. .  C ADDR    005AH   A       
+CHK_DIG3. .  C ADDR    0067H   A       
+CHK_DIG4. .  C ADDR    0074H   A       
+EA. . . . .  B ADDR    00A8H.7 A       
+ET0 . . . .  B ADDR    00A8H.1 A       
+EXIT. . . .  C ADDR    007BH   A       
+MAIN. . . .  C ADDR    0030H   A       
+P0. . . . .  D ADDR    0080H   A       
+P2. . . . .  D ADDR    00A0H   A       
+REF_DISPLAY  C ADDR    004DH   A       
+TH0 . . . .  D ADDR    008CH   A       
+TL0 . . . .  D ADDR    008AH   A       
+TMOD. . . .  D ADDR    0089H   A       
+TR0 . . . .  B ADDR    0088H.4 A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

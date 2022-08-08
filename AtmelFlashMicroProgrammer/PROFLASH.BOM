@@ -1,0 +1,53 @@
+Atmel Flash Programmer                        Revised: September  3, 1998
+                                              Revision: 
+Bill Of Materials            September    3, 1998     9:50:44     Page    1
+
+ Item  Quantity  Reference                 Part        
+____________________________________________________
+
+    1       4    C1,C2,C4,C5               33p         
+
+    2       1    C3                        1/35        
+
+    3       1    C6                        220/50      
+
+    4       5    C7,C8,C10,C11,C12         u1          
+
+    5       1    C9                        47/10       
+
+    6       1    D1                        B40C1500    
+
+    7       1    D2                        ZPD12       
+
+    8       1    IC1                       LM317L      
+
+    9       2    IC2,IC3                   78L05       
+
+   10       1    IC4                       89C51       
+
+   11       1    IC5                       74HCT164    
+
+   12       1    IC6                       TLC2272     
+
+   13       1    IC7                       ZIF40       
+
+   14       2    J1,J2                     J 1X1       
+
+   15       1    P1                        D-SUB9      
+
+   16       1    R1                        237R        
+
+   17       3    R2,R3,R9                  2k2         
+
+   18       1    R4                        8*4k7       
+
+   19       2    R5,R7                     15k         
+
+   20       2    R6,R8                     21k         
+
+   21       2    T1,T3                     BS170       
+
+   22       1    T2                        BS250       
+
+   23       2    X1,X2                     11.0592MHz  
+

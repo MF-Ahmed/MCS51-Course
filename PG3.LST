@@ -1,0 +1,63 @@
+MCS-51 MACRO ASSEMBLER    PG3                                                                       11/27/:4   PAGE    1
+
+
+DOS 7.10 (038-N) MCS-51 MACRO ASSEMBLER, V2.2
+OBJECT MODULE PLACED IN PG3.OBJ
+ASSEMBLER INVOKED BY:  E:\BACKUP\STUDENTS\BATCH21\ASM51.EXE PG3.A51
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;*******************************PROGRAM OBJECTIVE******************************
+                       2     ;MOVE A SINGLE LED FROM LEFT TO RIGHT AND RIGHT TO LEFT ON THE P1. SET THE
+                       3     ;MOVING SPEED OF 4 COUNTS PER SECOND.
+                       4     
+0000                   5     org 00h
+                       6     START:
+0000 74FE              7             MOV A,#0FEH
+0002 7F08              8             MOV R7,#8
+                       9     LEFT:
+0004 F590             10             MOV P1,A
+0006 23               11             RL A
+0007 12001A           12             CALL DELAY
+000A DFF8             13             DJNZ R7,LEFT
+000C 747F             14             MOV A,#7FH
+000E 7F08             15             MOV R7,#8
+                      16     RIGHT:
+0010 F590             17             MOV P1,A
+0012 03               18             RR A
+0013 12001A           19             CALL DELAY
+0016 DFF8             20             DJNZ R7,RIGHT
+0018 80E6             21             JMP START
+                      22     DELAY:
+001A 7902             23             mov R1,#2
+                      24     Y:
+001C 7A64             25             mov R2,#100
+                      26     X:
+001E 7BFA             27             mov R3,#250
+0020 DBFE             28             djnz R3,$
+0022 DAFA             29             djnz R2,X
+0024 D9F6             30             djnz R1,Y
+0026 22               31     ret
+                      32     end
+MCS-51 MACRO ASSEMBLER    PG3                                                                       11/27/:4   PAGE    2
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+DELAY. . .  C ADDR    001AH   A       
+LEFT . . .  C ADDR    0004H   A       
+P1 . . . .  D ADDR    0090H   A       
+RIGHT. . .  C ADDR    0010H   A       
+START. . .  C ADDR    0000H   A       
+X. . . . .  C ADDR    001EH   A       
+Y. . . . .  C ADDR    001CH   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND
