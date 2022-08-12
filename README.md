@@ -1,7 +1,6 @@
 # MCS51-Course
 Intel MCS51 Mocrocontroller (AT89C51) course in Assembly language. This course provides an introductory material for programming AT89C51 microcontrolles 
 
-
 ## PG1.A51
   - Generate the binary pattern in increasing order on the leds connected at port1
   Set the increasing speed of 2 counts per second.
@@ -10,7 +9,6 @@ Intel MCS51 Mocrocontroller (AT89C51) course in Assembly language. This course p
 - Generate the binary pattern in increasing/ decreasing order when the user presses
   The buttons at p2.2/ p2.3. The leds are connected at port1. Set the counting
   speed of 2 counts per second.
-
 
 ## PG3.A51
 - Move a single led from left to right and right to left on the p1. Set the
@@ -23,7 +21,6 @@ Intel MCS51 Mocrocontroller (AT89C51) course in Assembly language. This course p
 
 ## PG5.A51
 - Generate the clock pulses of 30 hz at p1.0 by using timer 0.
-
 
 ## PG6.A51
 - Display the constant number 1234 on the 4 digit 7 segment display by using
@@ -42,45 +39,44 @@ Intel MCS51 Mocrocontroller (AT89C51) course in Assembly language. This course p
   On the hex keypad. The code of a new key should be entered from right side of
   The display and the previous data will also be shifted.
 
-PG10.A51
-Receive the scan code coming from the ATkeyboard at p3.6(clk) and p3.7 (data)
-Display the binary pattern of the scene code on the leds.
+## PG10.A51
+- Receive the scan code coming from the ATkeyboard at p3.6(clk) and p3.7 (data)
+  Display the binary pattern of the scene code on the leds.
 
-PG11.A51
-Transmitt the ascii codes from a to z continuously through serial port of
-89c51.use the baud rate of 9600 bps.
+## PG11.A51
+- Transmitt the ascii codes from a to z continuously through serial port of
+  89c51.use the baud rate of 9600 bps.
 
-PG12.A51
-Transmit the ascii codes of kes in the program pg9.a51 on serial port using
-The baud rate of 9600 bps. (suppose the crystal frequency is 11.0592 mhz.)
+## PG12.A51
+- Transmit the ascii codes of kes in the program pg9.a51 on serial port using
+  The baud rate of 9600 bps. (suppose the crystal frequency is 11.0592 mhz.)
 
-PG13.A51
-Transmit the ascii codes of kes in the program pg9.a51 on serial port using
-The baud rate of 9600 bps. (suppose the crystal frequency is 11.0592 mhz.)
+## PG13.A51
+- Transmit the ascii codes of kes in the program pg9.a51 on serial port using
+  The baud rate of 9600 bps. (suppose the crystal frequency is 11.0592 mhz.)
 
-PG14.A51
--- To Do ---
+## PG14.A51
+  - -- To Do ---
 
-PG16.A51
--- To Do ---
+## PG16.A51
+  - -- To Do ---
 
-PG17.A51
+## PG17.A51
+ - -- To Do ---
 
--- To Do ---
+## PG18.A51
+  - -- To Do ---
 
-PG18.A51
--- To Do ---
+## TSTLCD.A51
+  - This program is made for the testing of lcd module
 
-TSTLCD.A51
-This program is made for the testing of lcd module
+## KEY.A51
+  - -- To Do ---
 
-KEY.A51
--- To Do ---
-
-LCD.A51
--- To Do ---
-LCD1.A51
--- To Do ---
+## LCD.A51
+  - -- To Do ---
+## LCD1.A51
+ - -- To Do ---
 
 
 
