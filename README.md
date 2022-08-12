@@ -12,35 +12,35 @@ Intel MCS51 Mocrocontroller (AT89C51) course in Assembly language. This course p
   speed of 2 counts per second.
 
 
-PG3.A51
-Move a single led from left to right and right to left on the p1. Set the
-Moving speed of 4 counts per second.
+## PG3.A51
+- Move a single led from left to right and right to left on the p1. Set the
+  Moving speed of 4 counts per second.
 
-PG4.A51
-Generate the 7 segment codes of hexadecimal nombers in increasing order on the
-Least significant digit of 7 segment display. Set the increasing speed of 1
-Count per second. Use code memory for segment codes.
+## PG4.A51
+- Generate the 7 segment codes of hexadecimal nombers in increasing order on the
+  Least significant digit of 7 segment display. Set the increasing speed of 1
+  Count per second. Use code memory for segment codes.
 
-PG5.A51
-Generate the clock pulses of 30 hz at p1.0 by using timer 0.
+## PG5.A51
+- Generate the clock pulses of 30 hz at p1.0 by using timer 0.
 
 
-PG6.A51
-Display the constant number 1234 on the 4 digit 7 segment display by using
-Timer.
+## PG6.A51
+- Display the constant number 1234 on the 4 digit 7 segment display by using
+  Timer.
 
-PG7.A51
-Display 16 bit hexadecimal number on the 4 digit 7 segment with increasing
-Speed of 20 counts per second using timer0
+## PG7.A51
+- Display 16 bit hexadecimal number on the 4 digit 7 segment with increasing
+  Speed of 20 counts per second using timer0
 
-PG8.A51
-Display 16 bit hexadecimal number on the 4 digit 7 segment with increasing or
-Decreasing speed of 20 counts per second using buttons at p2.1 or p2.2
+## PG8.A51
+- Display 16 bit hexadecimal number on the 4 digit 7 segment with increasing or
+  Decreasing speed of 20 counts per second using buttons at p2.1 or p2.2
 
-PG9.A51
-Enter the 7 segment code on 4 digit 7 segment display when a key is pressed
-On the hex keypad. The code of a new key should be entered from right side of
-The display and the previous data will also be shifted.
+## PG9.A51
+- Enter the 7 segment code on 4 digit 7 segment display when a key is pressed
+  On the hex keypad. The code of a new key should be entered from right side of
+  The display and the previous data will also be shifted.
 
 PG10.A51
 Receive the scan code coming from the ATkeyboard at p3.6(clk) and p3.7 (data)
