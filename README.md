@@ -1,64 +1,62 @@
 # MCS51-Course
 Intel MCS51 Mocrocontroller (AT89C51) course in Assembly language. This course provides an introductory material for programming AT89C51 microcontrolles 
 
-* PG1.A51
-  GENERATE THE BINARY PATERN IN INCREASING ORDER ON THE LEDs CONNECTED AT PORT1
-  SET THE INCREASING SPEED OF 2 COUNTS PER SECOND.
 
-* PG2.A51
-  GENERATE THE BINARY PATERN IN INCREASING/ DECREASING ORDER WHEN THE USER PRESSES
-  THE BUTTONS AT P2.2/ P2.3. THE LEDs ARE CONNECTED AT PORT1. SET THE COUNTING
-  SPEED OF 2 COUNTS PER SECOND.
+## PG1.A51
+  - Generate the binary pattern in increasing order on the leds connected at port1
+  Set the increasing speed of 2 counts per second.
+
+## PG2.A51
+- Generate the binary pattern in increasing/ decreasing order when the user presses
+  The buttons at p2.2/ p2.3. The leds are connected at port1. Set the counting
+  speed of 2 counts per second.
 
 
-* PG3.A51
-  MOVE A SINGLE LED FROM LEFT TO RIGHT AND RIGHT TO LEFT ON THE P1. SET THE
-  MOVING SPEED OF 4 COUNTS PER SECOND.
+PG3.A51
+Move a single led from left to right and right to left on the p1. Set the
+Moving speed of 4 counts per second.
 
 PG4.A51
-GENERATE THE 7 SEGMENT CODES OF HEXADECIMAL NOMBERS IN INCREASING ORDER ON THE
-LEAST SIGNIFICANT DIGIT OF 7 SEGMENT DISPLAY. SET THE INCREASING SPEED OF 1
-COUNT PER SECOND. USE CODE MEMORY FOR SEGMENT CODES.
+Generate the 7 segment codes of hexadecimal nombers in increasing order on the
+Least significant digit of 7 segment display. Set the increasing speed of 1
+Count per second. Use code memory for segment codes.
 
 PG5.A51
-GENERATE THE CLOCK PULSES OF 30 Hz AT P1.0 BY USING TIMER 0.
+Generate the clock pulses of 30 hz at p1.0 by using timer 0.
 
 
 PG6.A51
-DISPLAY THE CONSTANT NUMBER 1234 ON THE 4 DIGIT 7 SEGMENT DISPLAY BY USING
-TIMER.
+Display the constant number 1234 on the 4 digit 7 segment display by using
+Timer.
 
 PG7.A51
-DISPLAY 16 BIT HEXADECIMAL NUMBER ON THE 4 DIGIT 7 SEGMENT WITH INCREASING
-SPEED OF 20 COUNTS PER SECOND USING TIMER0
+Display 16 bit hexadecimal number on the 4 digit 7 segment with increasing
+Speed of 20 counts per second using timer0
 
 PG8.A51
-DISPLAY 16 BIT HEXADECIMAL NUMBER ON THE 4 DIGIT 7 SEGMENT WITH INCREASING OR
-DECREASING SPEED OF 20 COUNTS PER SECOND USING BUTTONS AT P2.1 OR P2.2
-
+Display 16 bit hexadecimal number on the 4 digit 7 segment with increasing or
+Decreasing speed of 20 counts per second using buttons at p2.1 or p2.2
 
 PG9.A51
-ENTER THE 7 SEGMENT CODE ON 4 DIGIT 7 SEGMENT DISPLAY WHEN A KEY IS PRESSED
-ON THE HEX KEYPAD. THE CODE OF A NEW KEY SHOULD BE ENTERED FROM RIGHT SIDE OF
-THE DISPLAY AND THE PREVIOUS DATA WILL ALSO BE SHIFTED.
+Enter the 7 segment code on 4 digit 7 segment display when a key is pressed
+On the hex keypad. The code of a new key should be entered from right side of
+The display and the previous data will also be shifted.
 
 PG10.A51
-RECEIVE THE SCAN CODE COMING FROM THE ATKEYBOARD AT P3.6(CLK) AND P3.7 (DATA)
-DISPLAY THE BINARY PATERN OF THE SCANE CODE ON THE LEDs
+Receive the scan code coming from the ATkeyboard at p3.6(clk) and p3.7 (data)
+Display the binary pattern of the scene code on the leds.
 
 PG11.A51
-TRANSMITT THE ASCII CODES FROM A TO Z CONTINUOUSLY THROUGH SERIAL PORT OF
-89C51.USE THE BAUD RATE OF 9600 BPS.
-
+Transmitt the ascii codes from a to z continuously through serial port of
+89c51.use the baud rate of 9600 bps.
 
 PG12.A51
-TRANSMIT THE ASCII CODES OF KES IN THE PROGRAM PG9.A51 ON SERIAL PORT USING
-THE BAUD RATE OF 9600 BPS. (SUPPOSE THE CRYSTAL FREQUENCY IS 11.0592 MHz.)
-
+Transmit the ascii codes of kes in the program pg9.a51 on serial port using
+The baud rate of 9600 bps. (suppose the crystal frequency is 11.0592 mhz.)
 
 PG13.A51
-TRANSMIT THE ASCII CODES OF KES IN THE PROGRAM PG9.A51 ON SERIAL PORT USING
-THE BAUD RATE OF 9600 BPS. (SUPPOSE THE CRYSTAL FREQUENCY IS 11.0592 MHz.)
+Transmit the ascii codes of kes in the program pg9.a51 on serial port using
+The baud rate of 9600 bps. (suppose the crystal frequency is 11.0592 mhz.)
 
 PG14.A51
 -- To Do ---
@@ -74,7 +72,7 @@ PG18.A51
 -- To Do ---
 
 TSTLCD.A51
-THIS PROGRAM IS MADE FOR THE TESTING OF LCD MODULE
+This program is made for the testing of lcd module
 
 KEY.A51
 -- To Do ---
@@ -83,6 +81,14 @@ LCD.A51
 -- To Do ---
 LCD1.A51
 -- To Do ---
+
+
+
+
+
+
+
+
 
 
 
